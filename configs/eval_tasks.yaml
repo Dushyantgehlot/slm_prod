@@ -1,0 +1,13 @@
+# lm-evaluation-harness task suite shared across base / SFT / GPTQ eval runs.
+# Kept deliberately compact for free-Colab-quota turnaround; every task has a
+# `--limit` override in eval/run_eval.sh for smoke-testing before a full run.
+tasks:
+  - mmlu              # broad knowledge, 5-shot
+  - arc_challenge      # reasoning, 25-shot
+  - hellaswag           # commonsense, 10-shot
+  - gsm8k                # math / instruction-following proxy, 5-shot, strict-match
+  - truthfulqa_mc2        # truthfulness, 0-shot
+  - ifeval                  # instruction-following, 0-shot — most sensitive to SFT effect
+
+batch_size: auto
+device: cuda:0

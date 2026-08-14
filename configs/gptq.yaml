@@ -1,0 +1,19 @@
+# GPTQ quantization configuration (GPTQModel).
+# AutoGPTQ is deprecated as of 2026 — GPTQModel is the maintained successor
+# and the backend `transformers` expects for GPTQ checkpoints.
+bits: 4
+group_size: 128
+desc_act: true
+sym: false                 # GPTQModel default: asymmetric quantization, lower quant error
+damp_percent: 0.01
+
+calibration_dataset_id: HuggingFaceH4/no_robots   # calibrate on the same distribution as SFT
+calibration_split: train
+num_calibration_samples: 256
+max_seq_length: 2048
+
+input_dir: models/sft-gemma-4-e4b-no_robots-merged
+output_dir: models/sft-gemma-4-e4b-no_robots-gptq4bit
+
+push_to_hub: false
+hub_model_id: null   # e.g. "your-username/gemma-4-e4b-no_robots-sft-gptq4bit"

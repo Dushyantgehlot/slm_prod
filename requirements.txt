@@ -1,0 +1,19 @@
+# torch>=2.7 and peft>=0.19 are required together: PEFT 0.19 is what adds
+# regex-scoped / Gemma-4-aware target_modules handling (see configs/lora.yaml),
+# and it requires torch>=2.7.
+torch>=2.7
+transformers>=4.45
+datasets>=2.20
+accelerate>=0.34
+peft>=0.19
+trl>=0.10
+bitsandbytes>=0.44
+unsloth
+gptqmodel
+lm-eval>=0.4.4
+huggingface_hub>=0.24
+pyyaml
+pandas
+matplotlib
+python-dotenv
+pytest

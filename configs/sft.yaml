@@ -1,0 +1,26 @@
+# SFT training run configuration (TRL SFTTrainer / TrainingArguments subset).
+dataset_id: HuggingFaceH4/no_robots
+dataset_split: train
+eval_split: test
+text_field: messages
+
+per_device_train_batch_size: 2
+gradient_accumulation_steps: 4      # effective batch size 8
+num_train_epochs: 3
+learning_rate: 2.0e-4
+lr_scheduler_type: cosine
+warmup_ratio: 0.03
+weight_decay: 0.01
+optim: adamw_8bit
+logging_steps: 10
+eval_steps: 50
+save_steps: 50
+save_total_limit: 2
+seed: 3407
+
+output_dir: outputs/sft-gemma-4-e4b-no_robots
+adapter_dir: adapters/sft-gemma-4-e4b-no_robots
+merged_dir: models/sft-gemma-4-e4b-no_robots-merged
+
+push_to_hub: false
+hub_model_id: null   # e.g. "your-username/gemma-4-e4b-no_robots-sft"

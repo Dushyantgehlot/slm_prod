@@ -1,0 +1,50 @@
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
+.DS_Store
+
+# Editors
+.vscode/
+.idea/
+.claude/
+
+# Logs
+*.log
+
+# Build artifacts
+dist/
+build/
+
+# ML artifacts (large binaries — keep out of git, push to HF Hub instead)
+*.safetensors
+*.bin
+*.pt
+*.gguf
+checkpoints/
+outputs/
+wandb/
+adapters/*/
+!adapters/.gitkeep
+models/*/
+!models/.gitkeep
+
+# Eval raw outputs can be large; keep summarized results only
+eval/results/**/*.jsonl
+.ipynb_checkpoints/

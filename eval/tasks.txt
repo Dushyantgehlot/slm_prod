@@ -1,0 +1,6 @@
+mmlu
+arc_challenge
+hellaswag
+gsm8k
+truthfulqa_mc2
+ifeval

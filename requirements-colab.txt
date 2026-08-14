@@ -1,0 +1,13 @@
+# Trimmed install list for Colab — torch/transformers/accelerate/datasets
+# ship preinstalled on the Colab GPU image; reinstalling them wastes the
+# session's setup time and occasionally downgrades the CUDA-matched build.
+# peft>=0.19 is required for regex-scoped target_modules on multimodal Gemma
+# 4 (see configs/lora.yaml) — check Colab's preinstalled torch is >=2.7,
+# which peft>=0.19 requires; upgrade torch first if not.
+unsloth
+trl>=0.10
+peft>=0.19
+bitsandbytes>=0.44
+gptqmodel
+lm-eval>=0.4.4
+python-dotenv

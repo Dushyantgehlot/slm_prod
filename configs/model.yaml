@@ -1,0 +1,10 @@
+# Base model configuration.
+# E4B: 8B total / 4.5B effective params via per-layer embeddings, multimodal
+# (text + image + audio). QLoRA-trains on ~10GB VRAM — fits a free Colab T4
+# (16GB VRAM).
+base_model_id: google/gemma-4-E4B
+base_model_id_instruct: google/gemma-4-E4B-it   # reference only, not used in training
+max_seq_length: 2048
+dtype: bfloat16
+load_in_4bit: true          # NF4 quantization for QLoRA training
+chat_template: gemma4

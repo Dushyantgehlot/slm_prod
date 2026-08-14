@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "slm_prod"
+version = "0.1.0"
+description = "Base -> SFT -> GPTQ pipeline for Gemma 4 E4B, benchmarked at every stage with lm-evaluation-harness."
+requires-python = ">=3.10"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

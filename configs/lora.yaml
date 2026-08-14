@@ -1,0 +1,23 @@
+# QLoRA adapter configuration.
+#
+# target_modules is a full-path REGEX, not a plain leaf-name list, because
+# E4B is multimodal (text + image + audio). The vision/audio towers reuse
+# the same leaf names (q_proj, k_proj, ...) but wrap them in a custom
+# `Gemma4ClippableLinear` module that PEFT cannot adapt — a plain
+# target_modules=["q_proj", ...] list matches those wrapped modules too,
+# and PEFT's type-check rejects the match before any exclude_modules rule
+# gets a chance to run. Scoping the regex to `language_model.layers.*`
+# restricts adaptation to the text tower's real nn.Linear projections and
+# skips the vision/audio wrappers entirely.
+#
+# Requires peft>=0.19.0 (see requirements.txt), which also ships this same
+# pattern as Gemma 4's built-in default — target_modules can be omitted
+# entirely on 0.19.0+ to fall back to it, but it's kept explicit here so the
+# adapter scope is visible in config rather than implicit in a library version.
+r: 16
+lora_alpha: 16
+lora_dropout: 0.0
+target_modules: '.*language_model\.layers\.\d+\.(self_attn\.(q|k|v|o)_proj|mlp\.(gate|up|down)_proj)$'
+bias: none
+use_gradient_checkpointing: unsloth   # Unsloth's checkpointing offload, saves ~30% VRAM
+random_state: 3407
