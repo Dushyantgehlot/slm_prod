@@ -3,8 +3,20 @@
 # (text + image + audio). QLoRA-trains on ~10GB VRAM — fits a free Colab T4
 # (16GB VRAM).
 base_model_id: google/gemma-4-E4B
+# Tried unsloth/gemma-4-E4B-unsloth-bnb-4bit (smaller download, Unsloth dynamic
+# 4-bit) but its HF repo has low traffic (~2.8K downloads vs 608K for the -it
+# mirror) and hit a hard download stall (DownloadStallError, both Xet and HTTP
+# fallback exhausted) on Colab's network. Reverted to the canonical repo,
+# which downloaded successfully earlier in this same pipeline.
 base_model_id_instruct: google/gemma-4-E4B-it   # reference only, not used in training
 max_seq_length: 2048
 dtype: bfloat16
 load_in_4bit: true          # NF4 quantization for QLoRA training
 chat_template: gemma4
+# LoRA only ever targets language_model.layers.* (see configs/lora.yaml) — the
+# vision/audio towers are never trained, so skip loading them altogether.
+# On a T4 (no bf16 support), Unsloth upcasts non-quantized modules to float32;
+# leaving the multimodal towers loaded adds enough VRAM pressure that the
+# default device_map offloads some modules to CPU, which bnb 4-bit rejects
+# with "Some modules are dispatched on the CPU or the disk".
+text_only: true

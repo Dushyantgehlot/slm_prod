@@ -23,6 +23,7 @@ def main():
         max_seq_length=model_cfg["max_seq_length"],
         dtype=None,  # let Unsloth pick the best dtype for the detected GPU
         load_in_4bit=model_cfg["load_in_4bit"],
+        text_only=model_cfg["text_only"],
     )
     if model_cfg.get("chat_template"):
         tokenizer.chat_template = FastLanguageModel.get_chat_template(

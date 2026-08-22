@@ -9,7 +9,13 @@ peft>=0.19
 trl>=0.10
 bitsandbytes>=0.44
 unsloth
-gptqmodel
+# gptqmodel>=7.3.2 eagerly imports every bundled model definition (incl.
+# solar_open2.py) at `import gptqmodel` time, even though we only quantize
+# Gemma 4. That file needs transformers.masking_utils.create_recurrent_attention_mask,
+# which isn't in mainline transformers yet -> ImportError on import gptqmodel.
+# Pin below the release that added it (v7.3.2, 2026-07-25) until upstream fixes
+# the eager import or mainline transformers ships that function.
+gptqmodel<7.3.2
 lm-eval>=0.4.4
 huggingface_hub>=0.24
 pyyaml
