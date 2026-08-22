@@ -16,6 +16,11 @@ unsloth
 # Pin below the release that added it (v7.3.2, 2026-07-25) until upstream fixes
 # the eager import or mainline transformers ships that function.
 gptqmodel<7.3.2
+# PEFT probes is_gptqmodel_available() during get_peft_model(). Because gptqmodel
+# is installed (for the quantize stage), that probe fires during *training* and
+# hard-raises "gptqmodel requires optimum version 1.24.0 or higher". Needed even
+# though nothing is quantized until later in the pipeline.
+optimum>=1.24.0
 lm-eval>=0.4.4
 huggingface_hub>=0.24
 pyyaml
