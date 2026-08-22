@@ -48,3 +48,8 @@ models/*/
 # Eval raw outputs can be large; keep summarized results only
 eval/results/**/*.jsonl
 .ipynb_checkpoints/
+
+# Scratch from notebooks/master_pipeline_colab.ipynb: generated stage scripts,
+# subprocess job files, smoke-test eval output, and the rendered dataset splits.
+.master_run/
+data/prepared/
